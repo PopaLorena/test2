@@ -8,9 +8,9 @@ import { Item } from 'src/models/item';
 })
 export class ItemService {
 
-  readonly baseUrl = "https://localhost:44385/api/item/";
-  constructor(public httpClient: HttpClient) { }
 
+  constructor(public httpClient: HttpClient) { }
+  readonly baseUrl = "https://localhost:44385/api/item/";
   getItems(): Observable<Item[]> {
     return this.httpClient.get(this.baseUrl + "get") as Observable<Item[]>;
   }
@@ -18,8 +18,9 @@ export class ItemService {
   getItemById(id: number): Observable<Item> {
     return this.httpClient.get(this.baseUrl + "getItems/" + id) as Observable<Item>;
   }
+
   createItem(item: Item): Observable<Item> {
-    return this.httpClient.post(this.baseUrl + "getItems/", item) as Observable<Item>;
+    return this.httpClient.post(this.baseUrl + "post", item) as Observable<Item>;
   }
 
   delete(id: number): Observable<null> {

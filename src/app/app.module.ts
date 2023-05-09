@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,9 +26,11 @@ import { HttpClientModule } from '@angular/common/http';
     FormComponent
   ],
   imports: [
+    FormsModule,
+    MatMenuModule,
+    MatInputModule,
     HttpClientModule,
     MatDialogModule,
-    FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,

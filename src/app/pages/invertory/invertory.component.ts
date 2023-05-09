@@ -12,11 +12,19 @@ import { FormComponent } from './form/form.component';
 export class InvertoryComponent implements OnInit {
   error?: string;
   itemList!: Item[];
-  items: string[] = [
-    'Maia',
-    'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia', 'Maia'
-  ];
+
   constructor(public dialog: MatDialog, public itemService: ItemService) { }
+
+  async openDialog(id: number | undefined) {
+    const dialogRef = this.dialog.open(FormComponent, {
+      width: '250px',
+      data: { idToBeEdit: id },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
+  };
 
   getItems(): void {
     this.itemService.getItems().subscribe((list: Item[]) => {
@@ -27,19 +35,18 @@ export class InvertoryComponent implements OnInit {
     })
   }
 
+  deleteItem(id: number | undefined): void {
+    this.itemService.delete(id!).subscribe(
+      () => {
 
-  async openDialog() {
-    const dialogRef = this.dialog.open(FormComponent, {
-      width: '250px',
-      data: { items: this.items },
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
-  };
+        window.location.reload();
+      }, (err) => {
+      }
+    );
+  }
 
   ngOnInit(): void {
+    this.getItems();
   }
 
 
